@@ -21,7 +21,7 @@ gem 'haml-rails'
 gem 'pg'
 
 # JavaScript runtime
-gem 'therubyracer', :platform=>:ruby
+gem 'therubyracer', platform: :ruby
 
 # Web server
 gem 'thin'
@@ -39,7 +39,6 @@ group :development do
 
   # Guard
   gem 'guard-bundler'
-  gem 'guard-rails'
   gem 'guard-rspec'
 
   # Filesystem events (for Guard)
