@@ -4,12 +4,12 @@
   left: 15px;
 
   a {
-    color: $gray;
-    transition: color .25s ease-in-out;
+    color: darken($gray-lighter, 6.5%);
+    transition: color .5s ease-in-out;
     font-size: $font-size-large;
 
     &:hover {
-      color: $gray-darker;
+      color: $gray;
     }
   }
 }
