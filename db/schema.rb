@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141115171649) do
+ActiveRecord::Schema.define(version: 20141115185258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,5 +22,13 @@ ActiveRecord::Schema.define(version: 20141115171649) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "positions", force: true do |t|
+    t.integer "article_id",             null: false
+    t.inet    "user_ip",                null: false
+    t.integer "offset",     default: 0, null: false
+  end
+
+  add_index "positions", ["article_id", "user_ip"], name: "index_positions_on_article_id_and_user_ip", unique: true, using: :btree
 
 end
