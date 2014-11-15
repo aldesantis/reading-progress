@@ -53,7 +53,6 @@ end
 group :development, :test do
   # Factories
   gem 'factory_girl_rails'
-  gem 'faker'
 
   # Console
   gem 'pry-rails'
@@ -68,6 +67,9 @@ group :production do
 end
 
 group :test do
+  # Factories
+  gem 'faker'
+
   # Acceptance testing
   gem 'capybara'
   gem 'launchy'
