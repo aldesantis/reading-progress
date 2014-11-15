@@ -1,2 +1,9 @@
-%h1= @article.title
-= simple_format @article.body
+.home-button
+  %a{href: root_path}
+    %span.glyphicon.glyphicon-home(aria-hidden='true')
+
+.article
+  = render 'articles/header', article: @article
+
+  .article-body
+    = simple_format @article.body

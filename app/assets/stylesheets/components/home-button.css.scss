@@ -1,0 +1,15 @@
+.home-button {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+
+  a {
+    color: $gray;
+    transition: color .25s ease-in-out;
+    font-size: $font-size-large;
+
+    &:hover {
+      color: $gray-darker;
+    }
+  }
+}

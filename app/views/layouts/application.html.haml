@@ -14,5 +14,8 @@
 
   %body
     %main(role='main')
-      = render 'layouts/messages'
-      = yield
+      .container
+        = render 'layouts/messages'
+        = yield
+
+%link(href='http://fonts.googleapis.com/css?family=Lato:400,700,900|Roboto+Slab' rel='stylesheet')
