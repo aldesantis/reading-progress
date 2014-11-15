@@ -3,7 +3,7 @@
  */
 
 $(window).scroll(function (e) {
-  var article = $('.article-body:first').parents('.article')[0];
+  var article = $('.article-body:first').parents('.article:first');
 
   if (!article) {
     return false;
@@ -11,6 +11,14 @@ $(window).scroll(function (e) {
 
   $.doTimeout('scroll', 2000, function() {
     var scroll = $(window).scrollTop();
-    console.log(scroll);
+
+    $.ajax('/articles/' + article.data('article-id') + '/position.json', {
+      type: 'PUT',
+      data: {
+        position: {
+          offset: scroll
+        }
+      }
+    });
   });
 });
