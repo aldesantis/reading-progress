@@ -1,0 +1,8 @@
+{
+  "name": "Reading Progress",
+  "description": "A Rails blog that preserves reading progress.",
+  "repository": "https://github.com/alessandro1997/reading-progress",
+  "env": {
+    "RAILS_ENV": "production"
+  }
+}
