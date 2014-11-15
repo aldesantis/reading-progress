@@ -75,4 +75,7 @@ group :test do
 
   # Database testing
   gem 'database_cleaner'
+
+  # RSpec
+  gem 'shoulda-matchers', require: false
 end
