@@ -11,7 +11,7 @@ $(function() {
 $(function() {
   var article = $('.article-body:first').parents('.article:first');
 
-  if (!article) {
+  if (article.length < 1) {
     return false;
   };
 
@@ -35,7 +35,7 @@ $(window).scroll(function (e) {
 
   var article = $('.article-body:first').parents('.article:first');
 
-  if (!article) {
+  if (article.length < 1) {
     return false;
   }
 
