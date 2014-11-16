@@ -2,7 +2,15 @@
  *= require jquery.ba-dotimeout
  */
 
+var initialScroll = false;
+
 $(window).scroll(function (e) {
+  console.log(initialScroll);
+
+  if (initialScroll) {
+    return false;
+  }
+
   var article = $('.article-body:first').parents('.article:first');
 
   if (!article) {
@@ -52,5 +60,23 @@ $(window).scroll(function (e) {
         });
       }
     });
+  });
+});
+
+$(window).load(function() {
+  var article = $('.article-body:first').parents('.article:first');
+
+  if (!article) {
+    return false;
+  };
+
+  $.getJSON('/articles/' + article.data('article-id') + '/position.json', function (data) {
+    initialScroll = true;
+
+    $('body').scrollTop(data.position.offset);
+
+    setTimeout(function () {
+      initialScroll = false;
+    }, 100);
   });
 });
