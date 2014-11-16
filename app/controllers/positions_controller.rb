@@ -21,10 +21,9 @@ class PositionsController < ApplicationController
   def update
     @article = Article.find(params[:article_id])
 
-    Position.first_or_create(
-      user_ip: request.remote_ip,
-      article: @article
-    ).update_attributes!(position_params)
+    @position = @article.positions.where(user_ip: request.remote_ip).first_or_initialize
+    @position.attributes = position_params
+    @position.save!
 
     respond_to do |format|
       format.json { render json: { status: :ok } }
