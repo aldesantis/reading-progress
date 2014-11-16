@@ -7,7 +7,9 @@ class PositionsController < ApplicationController
 
   def show
     @article = Article.find(params[:article_id])
-    @position = @article.positions.find_by!(user_ip: request.remote_ip)
+
+    @position = @article.positions.find_by(user_ip: request.remote_ip)
+    @position ||= @article.positions.build(user_ip: request.remote_ip, offset: 0)
 
     respond_to do |format|
       format.json { render json: { status: :ok, position: { offset: @position.offset } } }
