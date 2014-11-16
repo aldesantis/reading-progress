@@ -8,7 +8,7 @@ $(function() {
   setStatus('idle');
 });
 
-$(window).load(function() {
+$(function() {
   var article = $('.article-body:first').parents('.article:first');
 
   if (!article) {
@@ -29,8 +29,6 @@ $(window).load(function() {
 });
 
 $(window).scroll(function (e) {
-  console.log(initialScroll);
-
   if (initialScroll) {
     return false;
   }
