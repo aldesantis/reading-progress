@@ -4,6 +4,30 @@
 
 var initialScroll = false;
 
+$(function() {
+  setStatus('idle');
+});
+
+$(window).load(function() {
+  var article = $('.article-body:first').parents('.article:first');
+
+  if (!article) {
+    return false;
+  };
+
+  $.getJSON('/articles/' + article.data('article-id') + '/position.json', function (data) {
+    initialScroll = true;
+
+    $('body').scrollTop(data.position.offset);
+
+    setStatus('loaded');
+
+    setTimeout(function () {
+      initialScroll = false;
+    }, 100);
+  });
+});
+
 $(window).scroll(function (e) {
   console.log(initialScroll);
 
@@ -28,55 +52,52 @@ $(window).scroll(function (e) {
         }
       },
       beforeSend: function () {
-        $('.status')
-          .removeClass('status-idle status-sent status-error')
-          .addClass('status-sending')
-          .text('Sending...');
+        setStatus('sending');
       },
       success: function () {
-        $('.status')
-          .removeClass('status-idle status-sending status-error')
-          .addClass('status-sent')
-          .text('Sent!');
-
-        $.doTimeout('scroll-status', 3000, function() {
-          $('.status')
-            .removeClass('status-sent status-sending status-error')
-            .addClass('status-idle')
-            .text('Idle');
-        });
+        setStatus('sent');
       },
       error: function () {
-        $('.status')
-          .removeClass('status-idle status-sending status-sent')
-          .addClass('status-error')
-          .text('Error');
-
-        $.doTimeout('scroll-status', 3000, function() {
-          $('.status')
-            .removeClass('status-sent status-sending status-error')
-            .addClass('status-idle')
-            .text('Idle');
-        });
+        setStatus('error');
       }
     });
   });
 });
 
-$(window).load(function() {
-  var article = $('.article-body:first').parents('.article:first');
+function setStatus(status)
+{
+  var text;
 
-  if (!article) {
-    return false;
-  };
+  switch (status) {
+    case 'idle':
+      text = 'Idle';
+      break;
 
-  $.getJSON('/articles/' + article.data('article-id') + '/position.json', function (data) {
-    initialScroll = true;
+    case 'sending':
+      text = 'Sending...';
+      break;
 
-    $('body').scrollTop(data.position.offset);
+    case 'sent':
+      text = 'Sent!';
+      break;
 
-    setTimeout(function () {
-      initialScroll = false;
-    }, 100);
-  });
-});
+    case 'error':
+      text = 'Error';
+      break;
+
+    case 'loaded':
+      text = 'Loaded!';
+      break;
+  }
+
+  $('.status')
+    .removeClass('status-idle status-sending status-sent status-loaded status-error')
+    .addClass('status-' + status)
+    .text(text);
+
+  if (status != 'idle') {
+    $.doTimeout('scroll-status', 3000, function() {
+      setStatus('idle');
+    });
+  }
+}

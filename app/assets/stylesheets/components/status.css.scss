@@ -29,4 +29,9 @@
   &.status-error {
     background-color: lighten($brand-danger, 6.5%);
   }
+
+  &.status-loaded {
+    background-color: #0074d9;
+    color: white;
+  }
 }
