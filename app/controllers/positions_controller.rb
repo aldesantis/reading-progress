@@ -1,9 +1,9 @@
 class PositionsController < ApplicationController
   respond_to :json
 
+  rescue_from Exception, with: :render_500
   rescue_from ActionController::RoutingError, with: :render_404
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
-  rescue_from Exception, with: :render_500
 
   def show
     @article = Article.find(params[:article_id])
