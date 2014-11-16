@@ -13,9 +13,8 @@ RSpec.feature 'The article page' do
   end
 
   scenario 'saves the reading progress', js: true do
-    expect {
-      page.execute_script 'window.scrollBy(0, 100)'
-      sleep 2.5
-    }.to change(article.positions, :count).by(1)
+    page.execute_script 'window.scrollBy(0, 100)'
+    sleep 2.5
+    expect(page).to have_content('SENT!')
   end
 end
