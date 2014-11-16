@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe PositionsController do
+  describe "GET 'show'" do
+    let!(:position) { FactoryGirl.create(:position) }
+    let!(:article) { position.article }
+
+    it 'loads the position' do
+      get :show, article_id: article.id, format: :json
+      expect(assigns(:position)).to eq(position)
+    end
+  end
+
   describe "PUT 'update'" do
     let!(:article) { FactoryGirl.create(:article) }
 

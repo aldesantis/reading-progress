@@ -5,6 +5,15 @@ class PositionsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from Exception, with: :render_500
 
+  def show
+    @article = Article.find(params[:article_id])
+    @position = @article.positions.find_by!(user_ip: request.remote_ip)
+
+    respond_to do |format|
+      format.json { render json: { status: :ok, position: { offset: @position.offset } } }
+    end
+  end
+
   def update
     @article = Article.find(params[:article_id])
 
