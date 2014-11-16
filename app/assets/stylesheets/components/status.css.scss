@@ -1,0 +1,32 @@
+.status {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+
+  padding: 10px;
+
+  font-size: $font-size-small;
+  text-transform: uppercase;
+
+  transition: background-color .25s ease-in-out;
+
+  width: 100px;
+  text-align: center;
+
+  &.status-idle {
+    background-color: $gray-lighter;
+  }
+
+  &.status-sending {
+    background-color: $brand-warning;
+  }
+
+  &.status-sent {
+    background-color: lighten($brand-success, 6.5%);
+    font-weight: bold;
+  }
+
+  &.status-error {
+    background-color: lighten($brand-danger, 6.5%);
+  }
+}

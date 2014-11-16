@@ -18,6 +18,38 @@ $(window).scroll(function (e) {
         position: {
           offset: scroll
         }
+      },
+      beforeSend: function () {
+        $('.status')
+          .removeClass('status-idle status-sent status-error')
+          .addClass('status-sending')
+          .text('Sending...');
+      },
+      success: function () {
+        $('.status')
+          .removeClass('status-idle status-sending status-error')
+          .addClass('status-sent')
+          .text('Sent!');
+
+        $.doTimeout('scroll-status', 3000, function() {
+          $('.status')
+            .removeClass('status-sent status-sending status-error')
+            .addClass('status-idle')
+            .text('Idle');
+        });
+      },
+      error: function () {
+        $('.status')
+          .removeClass('status-idle status-sending status-sent')
+          .addClass('status-error')
+          .text('Error');
+
+        $.doTimeout('scroll-status', 3000, function() {
+          $('.status')
+            .removeClass('status-sent status-sending status-error')
+            .addClass('status-idle')
+            .text('Idle');
+        });
       }
     });
   });

@@ -2,6 +2,9 @@
   %a{href: root_path}
     %span.glyphicon.glyphicon-home(aria-hidden='true')
 
+.status.status-idle
+  Idle
+
 .article{data: { 'article-id' => @article.id }}
   = render 'articles/header', article: @article
 
